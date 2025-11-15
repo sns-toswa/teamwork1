@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>PetX – Продаж тваринок</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* -------------------- ОСНОВА -------------------- */
+body {
+    margin: 0;
+    background: #f3f4f7;
+    font-family: "Segoe UI", sans-serif;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+header {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* -------------------- Пошук -------------------- */
+#search {
+    width: 60%;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 2px solid #d0d0d0;
+    transition: 0.3s;
+}
+
+#search:focus {
+    border-color: #2b8cff;
+    transform: scale(1.02);
+}
+
+/* -------------------- Фільтр -------------------- */
+#category {
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+/* -------------------- Контейнер карток -------------------- */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+/* -------------------- Картки -------------------- */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 14px;
+}
+
+/* -------------------- Кнопки -------------------- */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    background: #2b8cff;
+    color: white;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #0069e6;
+}
+
+/* -------------------- POPUP -------------------- */
+#popup-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#popup {
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    animation: pop 0.35s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#popup img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.close {
+    background: crimson;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐾 PetX – Продаж тваринок</h1>
+    <input id="search" type="text" placeholder="Пошук...">
+    <select id="category">
+        <option value="all">Всі категорії</option>
+        <option value="cat">Коти</option>
+        <option value="dog">Собаки</option>
+        <option value="small">Дрібні тварини</option>
+    </select>
+</header>
+
+<div class="container" id="list">
+
+    <div class="card" data-cat="cat">
+        <img src="https://placekitten.com/400/300">
+        <h3>Кошеня британське</h3>
+        <p class="price">2000 ₴</p>
+        <button onclick="openCard('Кошеня британське','https://placekitten.com/400/300','2000 ₴')">Деталі</button>
+    </div>
+
+    <div class="card" data-cat="dog">
+        <img src="https://placedog.net/400/300">
+        <h3>Щеня лабрадора</h3>
+        <p class="price">4500 ₴</p>
+        <button onclick="openCard('Щеня лабрадора','https://placedog.net/400/300','4500 ₴')">Деталі</button>
+    </div>
+
+    <div class="card" data-cat="small">
+        <img src="https://placebear.com/400/300">
+        <h3>Хом’як сирійський</h3>
+        <p class="price">150 ₴</p>
+        <button onclick="openCard('Хом’як сирійський','https://placebear.com/400/300','150 ₴')">Деталі</button>
+    </div>
+
+</div>
+
+<!-- POPUP -->
+<div id="popup-bg">
+    <div id="popup">
+        <img id="p-img">
+        <h2 id="p-title"></h2>
+        <p id="p-price"></p>
+        <button class="close" onclick="closePopup()">Закрити</button>
+    </div>
+</div>
+
+<script>
+/* ---- Пошук ---- */
+document.getElementById("search").addEventListener("input", () => {
+    let q = search.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(c => {
+        c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none";
+    });
+});
+
+/* ---- Фільтрація ---- */
+document.getElementById("category").addEventListener("change", () => {
+    let cat = category.value;
+    document.querySelectorAll(".card").forEach(c => {
+        c.style.display = (cat === "all" || c.dataset.cat === cat) ? "block" : "none";
+    });
+});
+
+/* ---- POPUP ---- */
+function openCard(title, img, price) {
+    document.getElementById("p-title").innerText = title;
+    document.getElementById("p-img").src = img;
+    document.getElementById("p-price").innerText = price;
+
+    document.getElementById("popup-bg").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup-bg").style.display = "none";
+}
+</script>
+
+</body>
+</html>
