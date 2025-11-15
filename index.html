@@ -14,11 +14,8 @@ body {
     min-height: 100vh;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-/* МЕНЮ */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* =================== МЕНЮ =================== */
 nav {
     background: linear-gradient(90deg, #fff, #e0eaff 70%, #f8fff1 100%);
     display: flex;
@@ -41,14 +38,15 @@ nav button {
     padding: 14px 32px;
     margin: 0 8px;
     border-radius: 15px;
-    transition: 0.21s, box-shadow 0.21s;
-    box-shadow: 0 4px 0 #c1fff5b2;
+    transition: 0.21s, box-shadow 0.21s, border-color .23s;
     background: linear-gradient(90deg,#ffd7e7 10%, #b9f7ff 65%, #dbffd4 90%);
     color: #272c95;
     text-shadow: 0 1px 10px #fff9, 0 0.5px 2px #aefffd40;
     letter-spacing: 0.5px;
     outline: none;
     position: relative;
+    border: 2px solid transparent;
+    opacity: 0.94;
 }
 
 nav button:hover, nav button.active {
@@ -56,243 +54,221 @@ nav button:hover, nav button.active {
     color: #061a3e;
     box-shadow: 0 9px 28px 0 #f2b2ff72, 0 2.5px 0 #bafaae;
     transform: scale(1.075) translateY(-2.5px);
-    border: 2.5px solid #fff8;
+    border: 2.5px solid rgba(45,45,70,0.13); /* напівпрозора обводка */
+    opacity: 1;
 }
 
 nav .secondary-btn {
     background: linear-gradient(91deg,#ffc4d7,#b7f5ff 65%,#fffbae 100%);
     color: #21394f;
 }
-
 nav .special-btn {
     background: linear-gradient(90deg, #fffafc, #fc6db0 38%, #a0f8ff 85%);
     color: #6c0d4c;
     box-shadow: 0 4px 16px #ffb3d448;
-    border: 2px solid #f3dfff77;
+    border: 2px solid #f3dfff18 !important;
 }
 nav .special-btn:hover {
     background: linear-gradient(90deg, #fc98d9, #ecfcff 85%);
     color: #195b7a;
-    border-color: #a3fde7;
+    border-color: #a3fde7 !important;
 }
 
-/* HOME */
-#home {
-    text-align: center;
-    padding: 68px 20px 48px 20px;
-    position: relative;
-    z-index: 0;
-}
-#home h1 {
-    font-size: 52px;
-    letter-spacing: 3px;
-    color: #1b2343;
-    filter: drop-shadow(0 5px 17px #fdedff80);
-    margin-bottom: 17px;
-    animation: appearY 1.05s;
-}
-#home p {
-    font-size: 24px;
-    margin-top: 0;
-    color: #555;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 1.2px;
-    animation: appearY2 1.28s;
-}
-.hero-img-box {
-    position: relative;
-    margin: 36px auto 0;
-    display: flex; justify-content: center; align-items: end;
-}
-.hero-img {
-    width: 410px; max-width: 93vw;
-    border-radius: 34px 34px 66px 66px;
-    box-shadow: 0 24px 36px #2c80e337, 0 2px 7px #a9e0eb3c;
-    animation: petFloat 4.1s ease-in-out infinite, fadeIn 2s;
+nav .glass-btn {
+    background: rgba(255,255,255,0.55);
+    color: #1e256a;
+    border: 2px solid rgba(15,40,80,0.24);
+    box-shadow: none;
+    opacity: 0.86;
 }
 
-@keyframes petFloat {
-    0%,100% { transform: translateY(0);}
-    55% { transform: translateY(-22px) scale(1.04);}
-    79% { transform: translateY(-9px);}
-}
-@keyframes appearY {
-    from {transform: translateY(37px); opacity:0;}
-    to {transform: translateY(0); opacity:1;}
-}
-@keyframes appearY2 {
-    from {transform: translateY(29px); opacity:0;}
-    to {transform: translateY(0); opacity:1;}
+nav .glass-btn:hover {
+    background: rgba(240,246,255,0.81);
+    border: 2px solid rgba(56,56,96,0.19);
+    color: #50549a;
 }
 
-.home-leaves {
-    position: absolute;
-    left: 7vw; top: 28px;
-    width: 65px; z-index: -1;
-    opacity: 0.19;
-    animation: rotateLeaf 13s linear infinite alternate;
-}
-@keyframes rotateLeaf {
-    0% {transform: rotate(-11deg) scale(1.07);}
-    100% {transform: rotate(15deg) scale(1.15);}
-}
-.home-dog {
-    position: absolute; right: 4vw; bottom: 46px;
-    width: 77px; opacity: 0.14; filter: blur(1.1px);
-    z-index: -1;
-    animation: dogWag 3.4s infinite linear alternate;
-}
-@keyframes dogWag {
-    0% {transform: rotate(-6deg);}
-    100% {transform: rotate(8deg);}
-}
-
-/* Магазин */
-#shop { display: none; min-height: 570px;}
-.header-shop {
-    text-align: center;
-    padding: 27px 10px 12px;
-}
-#category {
-    padding: 12px 22px;
-    border-radius: 13px;
-    font-size: 19px;
-    margin-left: 11px;
-    background: #fafdff;
-    border: 2px solid #a7c8fa;
-    color: #395a7f;
-}
-#search {
-    width: 62%;
-    padding: 15px 19px;
-    font-size: 21px;
+.toast {
+    position: fixed;
+    right: 30px; bottom: 30px;
+    background: rgba(41,49,81,0.88);
+    color: #fff;
     border-radius: 14px;
-    border: 2.5px solid #aee8f3;
-    transition: .29s;
-    margin-bottom: 14px;
-    margin-right: 7px;
-    outline: none;
-    box-shadow: 0 2.5px 0 #fdaead58;
+    padding: 21px 29px;
+    font-size: 20px;
+    z-index: 99999;
+    box-shadow: 0 4px 21px #fdaede38;
+    animation: popToast 0.27s;
 }
+@keyframes popToast {
+    from { transform: translateY(41px) scale(.95); opacity:0;}
+    to { transform: translateY(0) scale(1); opacity:1;}
+}
+
+/* ======= AUTH ========= */
+#auth-form-bg {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    width: 100vw; height:100vh;
+    background: rgba(59, 71, 95, 0.31);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+}
+
+#auth-form {
+    background: #fff;
+    border-radius: 19px;
+    padding: 44px 29px 33px 29px;
+    box-shadow: 0 8px 37px #7b98d238;
+    min-width: 320px;
+    max-width: 90vw;
+    text-align: center;
+    animation: authPop .34s;
+}
+@keyframes authPop {
+    from {transform: scale(0.76); opacity:0;}
+    to {transform: scale(1); opacity:1;}
+}
+#auth-form input {
+    padding: 13px 18px;
+    border-radius: 12px;
+    border: 2px solid #b7dff6;
+    font-size: 18px;
+    margin-bottom: 21px;
+    width: 92%;
+    outline: none;
+    transition: border .18s;
+}
+#auth-form input:focus { border: 2px solid #53afff;}
+
+#auth-form button {
+    border: none;
+    background: linear-gradient(97deg, #eefcff, #bde6ff 97%);
+    padding: 12px 33px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #265279;
+    border-radius: 12px;
+    margin-top: 9px;
+    cursor: pointer;
+    transition: background .19s;
+}
+#auth-form button:hover {background:linear-gradient(93deg,#b7f1fd,#f5e8ff);color:#187cc0;}
+#logout-btn {
+    position: absolute;
+    top:14px; right:20px;
+    font-size:19px;
+    border:none;
+    background:rgba(253,219,241,0.63);
+    color:#cf2561;
+    padding:8px 17px;
+    border-radius:11px;
+    cursor:pointer;
+    z-index:999;
+    transition:background .18s;
+    display: none;
+}
+#logout-btn:hover {background:rgba(251,161,241,0.77); color:#482239;}
+
+/* ======= ADMIN ADD FORM ======== */
+#admin-panel {
+    display: none;
+    background: linear-gradient(115deg,#fff,#e0eaff 118%);
+    border-radius: 18px;
+    padding: 27px 24px;
+    margin: 37px auto 19px auto;
+    box-shadow: 0 11px 41px #b7bced1f;
+    max-width: 360px;
+}
+#admin-panel h3 { margin-top:0; color: #293ea1;}
+#admin-panel input, #admin-panel textarea {
+    border-radius: 10px;
+    border: 2px solid #a7c8fa;
+    font-size: 17px;
+    padding: 11px 14px;
+    width: 98%;
+    margin-bottom: 13px;
+    outline: none;
+    transition: border .19s;
+}
+#admin-panel textarea {min-height: 52px;resize:vertical;}
+#admin-panel button {
+    background:linear-gradient(90deg,#7ffeec 6%,#fffcc9 97%);
+    color:#2c505f;font-weight:700;
+    border:none;
+    border-radius:11px;
+    font-size:17px;padding:9px 17px;
+    margin-top:4px; cursor:pointer;
+    transition:background .17s;
+}
+#admin-panel button:hover {background:linear-gradient(95deg,#e4ffc7,#ffd8f1);}
+#admin-panel label {color:#363c82;font-size:15px;}
+#add-category {font-size:15px;margin-bottom:13px;}
+
+/* --- HOME --- */
+#home {text-align: center; padding: 68px 20px 48px 20px; position: relative; z-index: 0;}
+#home h1 {font-size: 52px; letter-spacing: 3px; color: #1b2343; filter: drop-shadow(0 5px 17px #fdedff80); margin-bottom: 17px; animation: appearY 1.05s;}
+#home p {font-size: 24px;margin-top: 0; color: #555; max-width: 500px; margin-left: auto; margin-right: auto; letter-spacing: 1.2px; animation: appearY2 1.28s;}
+@keyframes appearY {from {transform: translateY(37px); opacity:0;}to {transform: translateY(0); opacity:1;}}
+@keyframes appearY2 {from {transform: translateY(29px); opacity:0;}to {transform: translateY(0); opacity:1;}}
+.hero-img-box {position: relative; margin: 36px auto 0; display: flex; justify-content: center; align-items: end;}
+.hero-img {width: 410px; max-width: 93vw; border-radius: 34px 34px 66px 66px; box-shadow: 0 24px 36px #2c80e337, 0 2px 7px #a9e0eb3c; animation: petFloat 4.1s ease-in-out infinite, fadeIn 2s;}
+@keyframes petFloat {0%,100% { transform: translateY(0);} 55% { transform: translateY(-22px) scale(1.04);} 79% { transform: translateY(-9px);}}
+.home-leaves {position: absolute;left: 7vw; top: 28px;width: 65px; z-index: -1;opacity: 0.19;animation: rotateLeaf 13s linear infinite alternate;}
+@keyframes rotateLeaf {0% {transform: rotate(-11deg) scale(1.07);}100% {transform: rotate(15deg) scale(1.15);}}
+.home-dog {position: absolute; right: 4vw; bottom: 46px;width: 77px; opacity: 0.14; filter: blur(1.1px);z-index: -1;animation: dogWag 3.4s infinite linear alternate;}
+@keyframes dogWag {0% {transform: rotate(-6deg);}100% {transform: rotate(8deg);}}
+/* --- SHOP --- */
+#shop { display: none; min-height: 570px;}
+.header-shop { text-align: center; padding: 27px 10px 12px;}
+#category {padding: 12px 22px; border-radius: 13px; font-size: 19px; margin-left: 11px; background: #fafdff; border: 2px solid #a7c8fa; color: #395a7f;}
+#search {width: 62%;padding: 15px 19px;font-size: 21px;border-radius: 14px;border: 2.5px solid #aee8f3;transition: .29s;margin-bottom: 14px;margin-right: 7px;outline: none;box-shadow: 0 2.5px 0 #fdaead58;}
 #search:focus {border-color: #1ebaef;}
 .header-shop h2 {color: #1e2379; margin-bottom: 18px;}
-/* Галерея */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 45px 27px;
-    padding: 34px 35px 34px 35px;
-}
-.card {
-    background: linear-gradient(113deg,#fffffe 65%, #fff9fe 97%);
-    padding: 24px 18px 24px 18px;
-    border-radius: 26px;
-    box-shadow: 0 8px 31px 2px rgba(47, 123, 202, 0.12), 0 1.5px 7px #ffb8f92a;
-    transition: 0.33s cubic-bezier(.11,.97,.89,.03), box-shadow .29s;
-    animation: slideUp 0.81s cubic-bezier(.11,.97,.89,.03);
-    position: relative;
-    overflow: hidden;
-    min-height: 390px;
-    display: flex; flex-direction: column; align-items: center;
-}
-@keyframes slideUp {
-    from { transform: translateY(45px) scale(0.92); opacity: 0; }
-    to { transform: translateY(0) scale(1); opacity: 1; }
-}
-.card:hover {
-    box-shadow: 0 19px 65px #ffbdf0b2, 0 3px 8px #98deede0;
-    transform: translateY(-8px) scale(1.046) rotate(-0.6deg);
-}
-.card img {
-    width: 91%;
-    border-radius: 20px;
-    object-fit: cover;
-    box-shadow: 0 11px 27px #b7bced41;
-    margin-bottom: 12px;
-    min-height: 220px;
-    max-height: 320px;
-    background: #e9ecff;
-    transition: .3s;
-}
+.container {display: grid;grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));gap: 45px 27px;padding: 34px 35px 34px 35px;}
+.card {background: linear-gradient(113deg,#fffffe 65%, #fff9fe 97%);padding: 24px 18px 24px 18px;border-radius: 26px;box-shadow: 0 8px 31px 2px rgba(47, 123, 202, 0.12), 0 1.5px 7px #ffb8f92a;transition: 0.33s cubic-bezier(.11,.97,.89,.03), box-shadow .29s;animation: slideUp 0.81s cubic-bezier(.11,.97,.89,.03);position: relative;overflow: hidden;min-height: 390px;display: flex; flex-direction: column; align-items: center;}
+@keyframes slideUp {from { transform: translateY(45px) scale(0.92); opacity: 0; }to { transform: translateY(0) scale(1); opacity: 1; }}
+.card:hover {box-shadow: 0 19px 65px #ffbdf0b2, 0 3px 8px #98deede0;transform: translateY(-8px) scale(1.046) rotate(-0.6deg);}
+.card img {width: 91%;border-radius: 20px;object-fit: cover;box-shadow: 0 11px 27px #b7bced41;margin-bottom: 12px;min-height: 220px;max-height: 320px;background: #e9ecff;transition: .3s;}
 .card h3 {font-size: 25px; margin-bottom: 6px; color:#2a57c3;}
-.card .price {
-    font-size: 21px;
-    color: #009eac;
-    font-weight: 600;
-    letter-spacing: .25px;
-    margin-bottom: 8px;
-}
-.card .card-type {
-    font-size: 15px;
-    font-style: italic;
-    color: #a9a8bb;
-    margin-bottom: 10px;
-}
-.card .buy-btn {
-    margin-top: auto;
-}
-
-/* КНОПКИ в картках */
-.card .buy-btn,
-.card .fav-btn,
-.card .special-offer {
+.card .price {font-size: 21px;color: #009eac;font-weight: 600;letter-spacing: .25px;margin-bottom: 8px;}
+.card .card-type {font-size: 15px;font-style: italic;color: #a9a8bb;margin-bottom: 10px;}
+.card .buy-btn,.card .fav-btn,.card .special-offer,.card .more-btn {
     padding: 14px 29px;
     font-size: 19px;
     border-radius: 14px;
-    border: none;
+    border: 2px solid transparent;
     margin: 5px 8px 0 0;
     cursor: pointer;
     font-weight: 600;
     outline: none;
-    transition: 0.21s, box-shadow 0.21s;
-    box-shadow: 0 2.5px 0 #aac7ff66;
+    transition: 0.21s, box-shadow 0.21s, border .21s;
     background: linear-gradient(90deg, #1fcfff 15%, #6bffb9 88%);
     color: #02797d;
+    /* нова прозорість */
+    opacity: 0.93;
 }
-
-.card .buy-btn:hover {
+.card .buy-btn:hover, .card .more-btn:hover {
     background: linear-gradient(90deg, #ffbe9f 10%, #1fddee 85%);
     color: #a31399;
+    border: 2px solid rgba(120,120,120,.18);
     box-shadow: 0 7px 21px #79efff46;
     transform: scale(1.06) translateY(-2px);
+    opacity: 1;
 }
-.card .fav-btn {
-    background: linear-gradient(90deg, #ffe0ab 5%, #f893be 90%);
-    color: #522059;
-}
-.card .fav-btn:hover {
-    color: #fff;
-    background: linear-gradient(90deg,#e49d98,#ff6dd8 97%);
-    box-shadow: 0 6px 22px #fbb7f892;
-}
-
-.card .special-offer {
-    background: linear-gradient(91deg, #ffebb0 14%, #ff5790 88%);
-    color: #6e2e3f;
-    font-weight: 700;
-    border: 2.5px solid #ffbaed4d;
-    margin-top: 13px;
-}
+.card .fav-btn {background: linear-gradient(90deg, #ffe0ab 5%, #f893be 90%);color: #522059; opacity: 0.87;}
+.card .fav-btn:hover {color: #fff;background: linear-gradient(90deg,#e49d98,#ff6dd8 97%);box-shadow: 0 6px 22px #fbb7f892;border: 2px solid rgba(180,80,150,.14);}
+.card .special-offer {background: linear-gradient(91deg, #ffebb0 14%, #ff5790 88%);color: #6e2e3f;font-weight: 700;border: 2.5px solid #ffbaed4d;margin-top: 13px;}
 .card .special-offer:hover {background:linear-gradient(96deg, #fdbfae 22%,#e47fff 96%);color:#1a214e;}
-
+.card .more-btn {background: linear-gradient(90deg, #bed8ff 15%, #fffba0 88%);color: #3062af;}
+.card .more-btn:active {background:#fff;}
 /* POPUP */
-#popup-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(39, 19, 65, 0.45);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 50000;
-    animation: fadeIn 0.19s;
-}
+#popup-bg {position: fixed;top: 0; left: 0;width: 100vw; height: 100vh;background: rgba(39, 19, 65, 0.45);display: none;justify-content: center;align-items: center;z-index: 50000;animation: fadeIn 0.19s;}
 #popup {
     background: linear-gradient(115deg,#fff,#e0eaff 118%);
-    width: 95vw;
-    max-width: 480px;
+    width: 95vw; max-width: 480px;
     padding: 33px 20px 26px 20px;
     border-radius: 23px;
     animation: pop 0.33s cubic-bezier(.2,.75,.9,1.01);
@@ -300,45 +276,24 @@ nav .special-btn:hover {
     text-align: center;
     position: relative;
 }
-@keyframes pop {
-    from { transform: scale(0.6) rotate(-7deg); opacity: 0;}
-    to { transform: scale(1) rotate(2deg); opacity: 1;}
-}
-#popup img {
-    width: 92%; max-width:340px;
-    border-radius:20px;
-    box-shadow:0 10px 22px #6ebbf67d;
-    margin-bottom: 20px;
-}
+@keyframes pop {from { transform: scale(0.6) rotate(-7deg); opacity: 0;}to { transform: scale(1) rotate(2deg); opacity: 1;}}
+#popup img {width: 92%; max-width:340px; border-radius:20px; box-shadow:0 10px 22px #6ebbf67d; margin-bottom: 20px;}
 #popup h2 {font-size: 27px; margin:0; color:#2041b8;}
 #popup p {font-size: 21px; color:#179a98;}
-.close {
-    background: linear-gradient(88deg,#f4598d 5%,#fe6161 110%);
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 11px;
-    font-size: 17px;
-    margin-top: 20px;
-    font-weight: 700;
-    box-shadow: 0 3px 13px #f471b248;
-    transition: background .19s, color .19s;
-}
-.close:hover {
-    background: linear-gradient(90deg,#fc8bb5,#fd6a6a);
-    color: #2f1952;
-    box-shadow: 0 7px 25px #c553ad38; 
-}
+.close {background: linear-gradient(88deg,#f4598d 5%,#fe6161 110%);color: #fff;padding: 12px 25px;border: none;border-radius: 11px;font-size: 17px;margin-top: 20px;font-weight: 700;box-shadow: 0 3px 13px #f471b248;transition: background .19s, color .19s;}
+.close:hover {background: linear-gradient(90deg,#fc8bb5,#fd6a6a);color: #2f1952;box-shadow: 0 7px 25px #c553ad38;}
 </style>
 </head>
-
 <body>
 
 <!-- ---------------- MENU ---------------- -->
 <nav>
     <button id="homeBtn" onclick="showHome()" class="active">🏠 Головна</button>
     <button id="shopBtn" onclick="showShop()" class="secondary-btn">🛒 Магазин</button>
-    <button onclick="alert('Акція тижня! 10% знижка на всіх котів 🐱')" class="special-btn">🔥 Акції</button>
+    <button onclick="showToast('Акція тижня! 10% знижка на всіх котів 🐱')" class="special-btn">🔥 Акції</button>
+    <button onclick="showAuthForm('register')" class="glass-btn" id="registerNavBtn">Реєстрація</button>
+    <button onclick="showAuthForm('login')" class="glass-btn" id="loginNavBtn">Вхід</button>
+    <button id="logout-btn" onclick="logout()" style="display:none;">Вийти</button>
 </nav>
 
 <!-- ---------------- HOME PAGE ---------------- -->
@@ -352,7 +307,6 @@ nav .special-btn:hover {
     <div class="hero-img-box">
         <img class="hero-img" src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80" alt="cat-dog">
     </div>
-
     <button class="special-offer" style="margin-top:39px;" onclick="showShop()">Перейти в магазин</button>
 </section>
 
@@ -371,152 +325,49 @@ nav .special-btn:hover {
         </select>
     </div>
 
+    <div id="admin-panel">
+        <h3>Додати тварину (адмін)</h3>
+        <label>Категорія:
+            <select id="add-category">
+                <option value="cat">Кіт</option>
+                <option value="dog">Собака</option>
+                <option value="small">Мала тварина</option>
+                <option value="exotic">Екзотика</option>
+                <option value="bird">Птах</option>
+            </select>
+        </label><br>
+        <label>Назва:<br>
+            <input id="add-name" type="text" maxlength="40" required>
+        </label><br>
+        <label>Опис:<br>
+            <textarea id="add-desc" maxlength="120"></textarea>
+        </label><br>
+        <label>Ціна:<br>
+            <input id="add-price" type="text" maxlength="12" required placeholder="Напр. 4000 ₴">
+        </label><br>
+        <label>Зображення (посилання):<br>
+            <input id="add-img" type="url" required placeholder="https://...">
+        </label><br>
+        <button onclick="addNewPet()">Додати в магазин</button>
+    </div>
+
     <div class="container" id="list">
-
-        <!-- ==== КОТИ ==== -->
-        <div class="card" data-cat="cat">
-            <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80" alt="Британське кошеня">
-            <h3>Британське кошеня</h3>
-            <p class="card-type">Кішка</p>
-            <p class="price">2000 ₴</p>
-            <button class="buy-btn" onclick="openCard('Британське кошеня', 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80','2000 ₴','Кішка')">Деталі</button>
-            <button class="fav-btn" onclick="alert('Додано в улюблене 💗')">💗 В улюблене</button>
-        </div>
-        <div class="card" data-cat="cat">
-            <img src="https://images.unsplash.com/photo-1518715308788-3005759c41b0?auto=format&fit=crop&w=800&q=80" alt="Шотландський висловухий">
-            <h3>Шотландський висловухий</h3>
-            <p class="card-type">Кішка</p>
-            <p class="price">3500 ₴</p>
-            <button class="buy-btn" onclick="openCard('Шотландський висловухий','https://images.unsplash.com/photo-1518715308788-3005759c41b0?auto=format&fit=crop&w=900&q=80','3500 ₴','Кішка')">Деталі</button>
-            <button class="fav-btn" onclick="alert('Додано в улюблене 💗')">💗 В улюблене</button>
-        </div>
-        <div class="card" data-cat="cat">
-            <img src="https://images.unsplash.com/photo-1558944355-c1e96b1c414c?auto=format&fit=crop&w=800&q=80" alt="Мейн-кун">
-            <h3>Мейн-кун</h3>
-            <p class="card-type">Кішка</p>
-            <p class="price">6000 ₴</p>
-            <button class="buy-btn" onclick="openCard('Мейн-кун','https://images.unsplash.com/photo-1558944355-c1e96b1c414c?auto=format&fit=crop&w=900&q=80','6000 ₴', 'Кішка')">Деталі</button>
-            <button class="fav-btn" onclick="alert('Додано в улюблене 💗')">💗 В улюблене</button>
-        </div>
-        <div class="card" data-cat="cat">
-            <img src="https://images.unsplash.com/photo-1518715308788-3005759c41b2?auto=format&fit=crop&w=800&q=80" alt="Сіамська кішка">
-            <h3>Сіамська кішка</h3>
-            <p class="card-type">Кішка</p>
-            <p class="price">3800 ₴</p>
-            <button class="buy-btn" onclick="openCard('Сіамська кішка','https://images.unsplash.com/photo-1518715308788-3005759c41b2?auto=format&fit=crop&w=900&q=80','3800 ₴', 'Кішка')">Деталі</button>
-            <button class="fav-btn" onclick="alert('Додано в улюблене 💗')">💗 В улюблене</button>
-            <button class="special-offer" onclick="alert('Акція! 10% знижка 🎉')">Знижка 10%</button>
-        </div>
-        <div class="card" data-cat="cat">
-            <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=701&q=80" alt="Персидський кіт">
-            <h3>Персидський кіт</h3>
-            <p class="card-type">Кішка</p>
-            <p class="price">4200 ₴</p>
-            <button class="buy-btn" onclick="openCard('Персидський кіт','https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80','4200 ₴','Кішка')">Деталі</button>
-        </div>
-        <!-- ==== СОБАКИ ==== -->
-        <div class="card" data-cat="dog">
-            <img src="https://images.unsplash.com/photo-1518715308788-3005759c41b1?auto=format&fit=crop&w=800&q=80" alt="Лабрадор">
-            <h3>Лабрадор</h3>
-            <p class="card-type">Собака</p>
-            <p class="price">4500 ₴</p>
-            <button class="buy-btn" onclick="openCard('Лабрадор','https://images.unsplash.com/photo-1518715308788-3005759c41b1?auto=format&fit=crop&w=900&q=80','4500 ₴','Собака')">Деталі</button>
-            <button class="fav-btn" onclick="alert('Додано у вибране 🐶')">🐶 У вибране</button>
-        </div>
-        <div class="card" data-cat="dog">
-            <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80" alt="Німецька вівчарка">
-            <h3>Німецька вівчарка</h3>
-            <p class="card-type">Собака</p>
-            <p class="price">7300 ₴</p>
-            <button class="buy-btn" onclick="openCard('Німецька вівчарка','https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=900&q=80','7300 ₴','Собака')">Деталі</button>
-        </div>
-        <div class="card" data-cat="dog">
-            <img src="https://images.unsplash.com/photo-1518715308788-3005759c41b3?auto=format&fit=crop&w=800&q=80" alt="Хаскі синьоокий">
-            <h3>Хаскі синьоокий</h3>
-            <p class="card-type">Собака</p>
-            <p class="price">6200 ₴</p>
-            <button class="buy-btn" onclick="openCard('Хаскі синьоокий','https://images.unsplash.com/photo-1518715308788-3005759c41b3?auto=format&fit=crop&w=900&q=80','6200 ₴','Собака')">Деталі</button>
-            <button class="special-offer" onclick="alert('Знижка на Хаскі 8% ⭐')">Спецпропозиція</button>
-        </div>
-        <div class="card" data-cat="dog">
-            <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=80" alt="Померанський шпіц">
-            <h3>Померанський шпіц</h3>
-            <p class="card-type">Собака</p>
-            <p class="price">7900 ₴</p>
-            <button class="buy-btn" onclick="openCard('Померанський шпіц','https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=80','7900 ₴','Собака')">Деталі</button>
-        </div>
-        <div class="card" data-cat="dog">
-            <img src="https://images.unsplash.com/photo-1568572933382-74d440642117?auto=format&fit=crop&w=800&q=80" alt="Коргі">
-            <h3>Коргі</h3>
-            <p class="card-type">Собака</p>
-            <p class="price">6900 ₴</p>
-            <button class="buy-btn" onclick="openCard('Коргі','https://images.unsplash.com/photo-1568572933382-74d440642117?auto=format&fit=crop&w=900&q=80','6900 ₴','Собака')">Деталі</button>
-        </div>
-
-        <!-- ==== МАЛІ ТВАРИНИ ==== -->
-        <div class="card" data-cat="small">
-            <img src="https://images.unsplash.com/photo-1518715308788-3005759c41b4?auto=format&fit=crop&w=800&q=80" alt="Хом’як сирійський">
-            <h3>Хом’як сирійський</h3>
-            <p class="card-type">Гризун</p>
-            <p class="price">150 ₴</p>
-            <button class="buy-btn" onclick="openCard('Хом’як сирійський','https://images.unsplash.com/photo-1518715308788-3005759c41b4?auto=format&fit=crop&w=900&q=80','150 ₴','Гризун')">Деталі</button>
-        </div>
-        <div class="card" data-cat="small">
-            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=800&q=80" alt="Морська свинка">
-            <h3>Морська свинка</h3>
-            <p class="card-type">Гризун</p>
-            <p class="price">220 ₴</p>
-            <button class="buy-btn" onclick="openCard('Морська свинка','https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=80','220 ₴','Гризун')">Деталі</button>
-        </div>
-        <div class="card" data-cat="small">
-            <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80" alt="Кролик біленький">
-            <h3>Кролик біленький</h3>
-            <p class="card-type">Гризун</p>
-            <p class="price">300 ₴</p>
-            <button class="buy-btn" onclick="openCard('Кролик біленький','https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=900&q=80','300 ₴','Гризун')">Деталі</button>
-        </div>
-
-        <!-- ==== ПТАХИ ==== -->
-        <div class="card" data-cat="bird">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" alt="Хвилястий папуга">
-            <h3>Хвилястий папуга</h3>
-            <p class="card-type">Птах</p>
-            <p class="price">350 ₴</p>
-            <button class="buy-btn" onclick="openCard('Хвилястий папуга','https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80','350 ₴','Птах')">Деталі</button>
-        </div>
-        <div class="card" data-cat="bird">
-            <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=800&q=80" alt="Канарейка жовта">
-            <h3>Канарейка жовта</h3>
-            <p class="card-type">Птах</p>
-            <p class="price">500 ₴</p>
-            <button class="buy-btn" onclick="openCard('Канарейка жовта','https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=900&q=80','500 ₴','Птах')">Деталі</button>
-            <button class="special-offer" onclick="alert('2-га канарейка за півціни!')">Супер ціна</button>
-        </div>
-
-        <!-- ==== ЕКЗОТИКА ==== -->
-        <div class="card" data-cat="exotic">
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="Хамелеон пантеровий">
-            <h3>Хамелеон пантеровий</h3>
-            <p class="card-type">Екзотика</p>
-            <p class="price">4200 ₴</p>
-            <button class="buy-btn" onclick="openCard('Хамелеон пантеровий','https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80','4200 ₴','Екзотика')">Деталі</button>
-        </div>
-        <div class="card" data-cat="exotic">
-            <img src="https://images.unsplash.com/photo-1551711406-ef5fe247e8a6?auto=format&fit=crop&w=800&q=80" alt="Ігуана зелена">
-            <h3>Ігуана зелена</h3>
-            <p class="card-type">Екзотика</p>
-            <p class="price">4900 ₴</p>
-            <button class="buy-btn" onclick="openCard('Ігуана зелена','https://images.unsplash.com/photo-1551711406-ef5fe247e8a6?auto=format&fit=crop&w=900&q=80','4900 ₴','Екзотика')">Деталі</button>
-        </div>
-        <div class="card" data-cat="exotic">
-            <img src="https://images.unsplash.com/photo-1435224654926-ecc9f7fa028c?auto=format&fit=crop&w=800&q=80" alt="Королівський пітон (Ball python)">
-            <h3>Королівський пітон</h3>
-            <p class="card-type">Екзотика</p>
-            <p class="price">7100 ₴</p>
-            <button class="buy-btn" onclick="openCard('Королівський пітон', 'https://images.unsplash.com/photo-1435224654926-ecc9f7fa028c?auto=format&fit=crop&w=900&q=80','7100 ₴','Екзотика')">Деталі</button>
-        </div>
+        <!-- Додається скриптом -->
     </div>
 </section>
+
+<!-- ===== AUTH MODAL ===== -->
+<div id="auth-form-bg">
+    <form id="auth-form" onsubmit="return false;">
+        <h2 id="auth-title">Реєстрація</h2>
+        <input id="auth-username" type="text" maxlength="20" required placeholder="Логін">
+        <input id="auth-password" type="password" maxlength="24" required placeholder="Пароль">
+        <button id="auth-btn" type="button" onclick="onAuth()">Далі</button>
+        <div style="margin-top: 15px;">
+            <a href="#" id="switch-auth" style="font-size:16px;color:#1e256a;">Вже є акаунт?</a>
+        </div>
+    </form>
+</div>
 
 <!-- ===== POPUP ===== -->
 <div id="popup-bg">
@@ -524,13 +375,199 @@ nav .special-btn:hover {
         <img id="p-img" alt>
         <h2 id="p-title"></h2>
         <p id="p-type"></p>
+        <p id="p-desc" style="font-size:17px; color:#2c375e"></p>
         <p id="p-price"></p>
         <button class="close" onclick="closePopup()">Закрити</button>
     </div>
 </div>
+<div id="toast-root"></div>
 
 <script>
-// --- Навігація ---
+// ------------------ ЗМІННІ ---------------------
+let pets = [
+    // Коти
+    {cat: "cat", img:"https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80", name:"Британське кошеня", desc:"Миле сіре кошеня, лагідне та ігрове", price:"2000 ₴", type:"Кішка"},
+    {cat: "cat", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b0?auto=format&fit=crop&w=800&q=80", name:"Шотландський висловухий", desc:"Муркотливе та ніжне кошеня з особливими вушками", price:"3500 ₴", type:"Кішка"},
+    {cat: "cat", img:"https://images.unsplash.com/photo-1558944355-c1e96b1c414c?auto=format&fit=crop&w=800&q=80", name:"Мейн-кун", desc:"Величезна, розумна, пухнаста кішка", price:"6000 ₴", type:"Кішка"},
+    // Собаки
+    {cat: "dog", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b1?auto=format&fit=crop&w=800&q=80", name:"Лабрадор", desc:"Дружній сімейний собака, обожнює дітей", price:"4500 ₴", type:"Собака"},
+    {cat: "dog", img:"https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80", name:"Німецька вівчарка", desc:"Розумний сторож, дуже відданий", price:"7300 ₴", type:"Собака"},
+    // Малі тварини
+    {cat: "small", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b4?auto=format&fit=crop&w=800&q=80", name:"Хом’як сирійський", desc:"Маленький пухнастик для дітей", price:"150 ₴", type:"Гризун"},
+    // Птахи
+    {cat: "bird", img:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80", name:"Хвилястий папуга", desc:"Яскравий улюбленець, любить спілкуватися", price:"350 ₴", type:"Птах"},
+    // Екзотика
+    {cat: "exotic", img:"https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80", name:"Хамелеон пантеровий", desc:"Кольоровий хамелеон", price:"4200 ₴", type:"Екзотика"},
+];
+
+// --------- AUTH STORAGE (імітація) --------------
+let users = JSON.parse(localStorage.getItem('users_v1')||'{}');
+let currentUser = localStorage.getItem('currentUser') || null;
+
+// ------------------ КАТАЛОГ, РЕНДЕР --------------------
+function renderPets() {
+    let list = document.getElementById('list');
+    list.innerHTML = '';
+    pets.forEach((p, idx) => {
+        let card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.cat = p.cat;
+        card.innerHTML = `
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p class="card-type">${p.type||''}</p>
+            <p class="price">${p.price}</p>
+            <button class="more-btn" onclick="openCard('${escapeStr(p.name)}','${escapeStr(p.img)}','${escapeStr(p.price)}','${escapeStr(p.type)}','${escapeStr(p.desc||'')}')">Детальніше</button>
+            <button class="buy-btn" onclick="showToast('Запит на покупку \"${p.name}\" відправлено! 🤗')">Купити</button>
+            <button class="fav-btn" onclick="showToast('Додано в улюблене 💗')">💗 Улюбити</button>
+            <button class="special-offer" onclick="showToast('Вибрано спеціальну пропозицію для: ${p.name} 🎁')">🤩 Пропозиція</button>
+        `;
+        list.appendChild(card);
+    });
+}
+renderPets();
+
+// ----------------- ПОШУК ---------------------
+search.addEventListener("input", () => {
+    let q = search.value.trim().toLowerCase();
+    document.querySelectorAll(".card").forEach(c => {
+        c.style.display = c.innerText.toLowerCase().includes(q) ? "flex" : "none";
+        if (c.style.display === "flex") c.style.animation = "slideUp 0.7s";
+    });
+});
+
+// ---------------- ФІЛЬТР -----------------
+category.addEventListener("change", () => {
+    let cat = category.value;
+    document.querySelectorAll(".card").forEach(c => {
+        c.style.display = (cat === "all" || c.dataset.cat === cat) ? "flex" : "none";
+        if (c.style.display === "flex") c.style.animation = "slideUp 0.7s";
+    });
+});
+
+// ---------------- CARDS POPUP ----------------------
+function openCard(title, img, price, type = "", desc = "") {
+    document.getElementById("p-title").innerText = title;
+    document.getElementById("p-img").src = img;
+    document.getElementById("p-img").alt = title;
+    document.getElementById("p-price").innerText = price;
+    document.getElementById("p-type").innerText = type ? "Тип: "+type : "";
+    document.getElementById("p-desc").innerText = desc ? desc : "";
+    document.getElementById("popup-bg").style.display = "flex";
+}
+function closePopup() {
+    document.getElementById("popup-bg").style.display = "none";
+}
+
+// ---------------- TOAST (сповіщення) ---------------------
+function showToast(msg) {
+    let toastRoot = document.getElementById('toast-root');
+    let t = document.createElement('div');
+    t.className = 'toast';
+    t.innerHTML = msg;
+    toastRoot.appendChild(t);
+    setTimeout(()=>{ t.style.opacity=0; setTimeout(()=>t.remove(),350)}, 2100);
+}
+// ----------------- AUTH ------------------
+function showAuthForm(mode) {
+    let bg = document.getElementById('auth-form-bg');
+    let title = document.getElementById('auth-title');
+    let submitBtn = document.getElementById('auth-btn');
+    let link = document.getElementById('switch-auth');
+    let form = document.getElementById('auth-form');
+    form.reset();
+    if (mode === "register") {
+        title.innerText = "Реєстрація";
+        submitBtn.innerText = "Зареєструватися";
+        link.innerText = "Вже є акаунт?";
+        link.onclick = ()=>showAuthForm('login');
+        submitBtn.onclick = doRegister;
+    } else {
+        title.innerText = "Вхід";
+        submitBtn.innerText = "Увійти";
+        link.innerText = "Створити новий акаунт";
+        link.onclick = ()=>showAuthForm('register');
+        submitBtn.onclick = doLogin;
+    }
+    bg.style.display = "flex";
+}
+function closeAuthForm() {
+    document.getElementById('auth-form-bg').style.display = "none";
+}
+
+// ---- Register & Login Logic (імітовано через localStorage) ----
+function doRegister() {
+    let user = document.getElementById('auth-username').value.trim();
+    let pass = document.getElementById('auth-password').value;
+    if (user.length<3 || pass.length<5) {
+        showToast('Логін або пароль закороткі');
+        return;
+    }
+    if (users[user]) {
+        showToast('Такий логін вже існує.');
+        return;
+    }
+    users[user] = pass;
+    localStorage.setItem('users_v1', JSON.stringify(users));
+    localStorage.setItem('currentUser', user);
+    currentUser = user;
+    updateAuthUI();
+    closeAuthForm();
+    showToast('Реєстрація успішна!');
+}
+function doLogin() {
+    let user = document.getElementById('auth-username').value.trim();
+    let pass = document.getElementById('auth-password').value;
+    if ((user === "admin" && pass === "123123123")
+        || (users[user] && users[user] === pass)) {
+        localStorage.setItem('currentUser', user);
+        currentUser = user;
+        updateAuthUI();
+        closeAuthForm();
+        showToast('Вхід виконано!');
+    } else {
+        showToast('Помилка авторизації');
+    }
+}
+function logout() {
+    localStorage.removeItem('currentUser');
+    currentUser = null;
+    updateAuthUI();
+    showToast('Ви вийшли з акаунта');
+}
+function updateAuthUI() {
+    document.getElementById('logout-btn').style.display = currentUser ? "" : "none";
+    document.getElementById('registerNavBtn').style.display = currentUser ? "none" : "";
+    document.getElementById('loginNavBtn').style.display = currentUser ? "none" : "";
+    // Якщо увійшов як "admin" — показати admin-панель
+    document.getElementById('admin-panel').style.display = (currentUser==="admin") ? "" : "none";
+}
+updateAuthUI();
+
+// --------------- ADMIN: Додає тваринку -----------------
+function addNewPet() {
+    let cat = document.getElementById('add-category').value;
+    let name = document.getElementById('add-name').value.trim();
+    let desc = document.getElementById('add-desc').value.trim();
+    let price = document.getElementById('add-price').value.trim();
+    let img = document.getElementById('add-img').value.trim();
+    if (!cat || !name || !price || !img) {
+        showToast('Заповніть усі поля!');
+        return;
+    }
+    pets.push({
+        cat, name, desc, price,
+        img, type: (cat==="cat" ? "Кішка": cat==="dog"?"Собака":cat==="small"?"Гризун":cat==="bird"?"Птах":"Екзотика")
+    });
+    renderPets();
+    showToast('Додано!');
+    document.getElementById('add-name').value="";
+    document.getElementById('add-desc').value="";
+    document.getElementById('add-price').value="";
+    document.getElementById('add-img').value="";
+}
+
+// ------------ Навігація ----------------
 function switchBtn(activeId) {
     homeBtn.classList.remove('active');
     shopBtn.classList.remove('active');
@@ -548,48 +585,13 @@ function showShop() {
     shop.style.display = "block";
     window.scrollTo({top:0, behavior:"smooth"});
 }
-
-// --- Пошук ---
-search.addEventListener("input", () => {
-    let q = search.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(c => {
-        c.style.display = c.innerText.toLowerCase().includes(q) ? "flex" : "none";
-    });
-    // Автоматична анімація появи
-    document.querySelectorAll(".card").forEach(c => {
-      if (c.style.display === "flex") c.style.animation = "slideUp 0.7s";
-    });
-});
-
-// --- Фільтри ---
-category.addEventListener("change", () => {
-    let cat = category.value;
-    document.querySelectorAll(".card").forEach(c => {
-        c.style.display = (cat === "all" || c.dataset.cat === cat) ? "flex" : "none";
-        if (c.style.display === "flex") c.style.animation = "slideUp 0.7s";
-    });
-});
-
-// --- POPUP ---
-function openCard(title, img, price, type = "") {
-    document.getElementById("p-title").innerText = title;
-    document.getElementById("p-img").src = img;
-    document.getElementById("p-img").alt = title;
-    document.getElementById("p-price").innerText = price;
-    document.getElementById("p-type").innerText = type ? "Тип: " + type : "";
-    document.getElementById("popup-bg").style.display = "flex";
+// Допоміжне
+function escapeStr(s) {
+    return String(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
 }
-
-function closePopup() {
-    document.getElementById("popup-bg").style.display = "none";
-}
-
-// --- Додає випадкову анімацію на блоки з дітьми при показі магазину (додає веселощів :)
-//function animateCards() {
-//    document.querySelectorAll(".card").forEach((c, i) => {
-//        c.style.animation = `slideUp 0.55s ${0.04*i}s cubic-bezier(.11,.97,.89,.03)`;
-//    });
-//}
+document.getElementById('auth-form-bg').addEventListener('click', function(e){
+    if (e.target===this) closeAuthForm();
+});
 </script>
 </body>
 </html>
