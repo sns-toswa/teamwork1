@@ -1,477 +1,1040 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<title>PetX – Магазин тваринок</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body {
-    margin: 0;
-    background: linear-gradient(120deg, #f5f6fa, #e0e8ff 60%, #ffedfa);
-    font-family: "Segoe UI", "Arial", sans-serif;
-    animation: fadeIn 1.2s both;
-    min-height: 100vh;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-/* =================== МЕНЮ =================== */
-nav {
-    background: linear-gradient(90deg, #fff, #e0eaff 70%, #f8fff1 100%);
-    display: flex;
-    justify-content: center;
-    gap: 45px;
-    padding: 20px 0 18px 0;
-    box-shadow: 0 4px 16px 2px rgba(48,82,204,0.13), 0 1.5px 0 #cfffab;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    border-bottom-left-radius: 19px;
-    border-bottom-right-radius: 21px;
-}
-nav button {
-    border: none;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 14px 32px;
-    margin: 0 8px;
-    border-radius: 15px;
-    transition: 0.21s, box-shadow 0.21s, border-color .23s;
-    background: linear-gradient(90deg,#ffd7e7 10%, #b9f7ff 65%, #dbffd4 90%);
-    color: #272c95;
-    text-shadow: 0 1px 10px #fff9, 0 0.5px 2px #aefffd40;
-    letter-spacing: 0.5px;
-    outline: none;
-    position: relative;
-    border: 2px solid transparent;
-    opacity: 0.94;
-}
-nav button:hover, nav button.active {
-    background: linear-gradient(90deg,#1fcfff 10%, #9ffc6d 71%, #fc8eb2 100%);
-    color: #061a3e;
-    box-shadow: 0 9px 28px 0 #f2b2ff72, 0 2.5px 0 #bafaae;
-    transform: scale(1.075) translateY(-2.5px);
-    border: 2.5px solid rgba(45,45,70,0.13);
-    opacity: 1;
-}
-nav .secondary-btn {
-    background: linear-gradient(91deg,#ffc4d7,#b7f5ff 65%,#fffbae 100%);
-    color: #21394f;
-}
-nav .special-btn {
-    background: linear-gradient(90deg, #fffafc, #fc6db0 38%, #a0f8ff 85%);
-    color: #6c0d4c;
-    box-shadow: 0 4px 16px #ffb3d448;
-    border: 2px solid #f3dfff18 !important;
-}
-nav .special-btn:hover {
-    background: linear-gradient(90deg, #fc98d9, #ecfcff 85%);
-    color: #195b7a;
-    border-color: #a3fde7 !important;
-}
-nav .glass-btn {
-    background: rgba(255,255,255,0.55);
-    color: #1e256a;
-    border: 2px solid rgba(15,40,80,0.24);
-    box-shadow: none;
-    opacity: 0.86;
-    font-size: 17px; /* Менший розмір */
-    padding: 10px 19px; /* Менше */
-}
-nav .glass-btn:hover {
-    background: rgba(240,246,255,0.81);
-    border: 2px solid rgba(56,56,96,0.19);
-    color: #50549a;
-}
-#logout-btn {
-    position: absolute;
-    top:14px; right:20px;
-    font-size:16px;
-    border:none;
-    background:rgba(253,219,241,0.63);
-    color:#cf2561;
-    padding:6px 16px;
-    border-radius:11px;
-    cursor:pointer;
-    z-index:999;
-    transition:background .18s;
-    display: none;
-}
-#logout-btn:hover {background:rgba(251,161,241,0.77); color:#482239;}
-/* ... решта CSS без змін ... */
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тварини | ЗооОЛХ</title>
+    <style>
+        /* Загальні стилі */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Шапка сайту */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #002f34;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #23e5db;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #002f34;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #002f34;
+            color: white;
+            border: none;
+            padding: 7px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #00444c;
+        }
+        
+        .user-actions a {
+            margin-left: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .user-actions a:hover {
+            color: #23e5db;
+        }
+        
+        .user-actions .add-btn {
+            background-color: #ffce32;
+            color: #002f34;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .user-actions .add-btn:hover {
+            background-color: #e6b82e;
+        }
+        
+        /* Навігація */
+        nav {
+            background-color: #002f34;
+            padding: 10px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #23e5db;
+        }
+        
+        .nav-links a.active {
+            color: #23e5db;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #23e5db;
+        }
+        
+        /* Основний контент */
+        main {
+            padding: 30px 0;
+        }
+        
+        .page-title {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #002f34;
+        }
+        
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border 0.3s;
+        }
+        
+        .filter-group select:focus, .filter-group input:focus {
+            border-color: #23e5db;
+            outline: none;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .filter-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .apply-btn {
+            background-color: #002f34;
+            color: white;
+        }
+        
+        .apply-btn:hover {
+            background-color: #00444c;
+        }
+        
+        .reset-btn {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .reset-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* Список оголошень */
+        .listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .listing-card {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .listing-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .listing-details {
+            padding: 15px;
+        }
+        
+        .listing-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #002f34;
+            margin-bottom: 5px;
+        }
+        
+        .listing-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .listing-location, .listing-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .listing-features {
+            display: flex;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .listing-features span {
+            margin-right: 15px;
+        }
+        
+        .animal-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #23e5db;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        
+        /* Пагінація */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            list-style: none;
+        }
+        
+        .pagination li {
+            margin: 0 5px;
+        }
+        
+        .pagination a {
+            display: block;
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .pagination a.active {
+            background-color: #002f34;
+            color: white;
+            border-color: #002f34;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #002f34;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: #23e5db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #00444c;
+            margin-top: 20px;
+        }
+        
+        /* Модальні вікна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #002f34;
+        }
+        
+        .modal form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal input, .modal select, .modal textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .modal textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .modal-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .modal-close {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-submit {
+            background-color: #002f34;
+            color: white;
+        }
+        
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-bar {
+                margin: 15px 0;
+                max-width: 100%;
+            }
+            
+            .user-actions {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .nav-links {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+            }
+            
+            .listings {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        /* Сповіщення */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #23e5db;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1100;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<!-- ---------------- MENU ---------------- -->
-<nav>
-    <button id="homeBtn" onclick="showHome()" class="active">🏠 Головна</button>
-    <button id="shopBtn" onclick="showShop()" class="secondary-btn">🛒 Магазин</button>
-    <button onclick="showToast('Акція тижня! 10% знижка на всіх котів 🐱')" class="special-btn">🔥 Акції</button>
-    <button id="profileNavBtn" onclick="showProfile()" class="glass-btn" style="display:none;">👤 Профіль</button>
-    <button onclick="showAuthForm('register')" class="glass-btn" id="registerNavBtn">Реєстрація</button>
-    <button onclick="showAuthForm('login')" class="glass-btn" id="loginNavBtn">Вхід</button>
-    <button id="logout-btn" onclick="logout()" style="display:none;">Вийти</button>
-</nav>
-<!-- ---------------- HOME PAGE ---------------- -->
-<section id="home">
-    <img class="home-leaves" src="https://cdn-icons-png.flaticon.com/512/735/735846.png" alt="">
-    <img class="home-dog" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="">
-    <h1 id="home-title">🐾 Ласкаво просимо в PetX!</h1>
-    <p id="home-desc">Купуй та продавай тваринок легко і безпечно.<br>
-       Обирай друга – анімована колекція з ❤️</p>
-    <div class="hero-img-box">
-        <img id="home-img" class="hero-img" src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80" alt="cat-dog">
-    </div>
-    <button class="special-offer" style="margin-top:39px;" onclick="showShop()">Перейти в магазин</button>
-</section>
-<!-- ---------------- SHOP PAGE ---------------- -->
-<section id="shop" style="display:none">
-    <div class="header-shop">
-        <h2>🛒 Магазин тваринок</h2>
-        <input id="search" type="text" placeholder="Пошук...">
-        <select id="category">
-            <option value="all">Всі категорії</option>
-            <option value="cat">Коти</option>
-            <option value="dog">Собаки</option>
-            <option value="small">Малі тварини</option>
-            <option value="exotic">Екзотичні</option>
-            <option value="bird">Птахи</option>
-        </select>
-    </div>
-    <div id="admin-panel">
-        <h3>Додати тварину (адмін)</h3>
-        <label>Категорія:
-            <select id="add-category">
-                <option value="cat">Кіт</option>
-                <option value="dog">Собака</option>
-                <option value="small">Мала тварина</option>
-                <option value="exotic">Екзотика</option>
-                <option value="bird">Птах</option>
-            </select>
-        </label><br>
-        <label>Назва:<br>
-            <input id="add-name" type="text" maxlength="40" required>
-        </label><br>
-        <label>Опис:<br>
-            <textarea id="add-desc" maxlength="120"></textarea>
-        </label><br>
-        <label>Ціна:<br>
-            <input id="add-price" type="text" maxlength="12" required placeholder="Напр. 4000 ₴">
-        </label><br>
-        <label>Зображення (посилання):<br>
-            <input id="add-img" type="url" required placeholder="https://...">
-        </label><br>
-        <button onclick="addNewPet()">Додати в магазин</button>
-    </div>
-    <div class="container" id="list"></div>
-</section>
-<!-- === PROFILE SECTION === -->
-<section id="profile" style="display:none; max-width:400px; margin:40px auto; background:#fff; border-radius:22px; box-shadow:0 4px 18px #c6d7ff50; padding:36px 23px 30px;">
-    <h2 style="text-align:center;color:#2a437e;">👤 Профіль</h2>
-    <div id="profileData"></div>
-    <button onclick="showChangePass()" style="margin-top:13px;">Змінити пароль</button>
-    <div id="changePassBox" style="display:none;margin-top:15px;">
-        <input type="password" id="newPass" placeholder="Новий пароль" style="padding:7px 12px;border-radius:7px;">
-        <button onclick="changePass()">Змінити</button>
-    </div>
-</section>
-<!-- === SITE CONSTRUCTOR SECTION FOR ADMIN === -->
-<section id="site-constructor" style="display:none; max-width:600px; margin:40px auto; background:#fafaff; border-radius:21px; box-shadow:0 4px 28px #cd9df933; padding:33px 21px 30px;">
-    <h2>🛠️ Конструктор головної сторінки</h2>
-    <label>Заголовок:<br>
-        <input id="cons-title" maxlength="60" style="width:95%;padding:9px 13px;border-radius:7px;">
-    </label><br>
-    <label>Опис:<br>
-        <textarea id="cons-desc" maxlength="300" style="width:95%;min-height:48px;border-radius:7px;"></textarea>
-    </label><br>
-    <label>Головне зображення (URL):<br>
-        <input id="cons-img" type="url" style="width:95%;padding:9px 13px;border-radius:7px;">
-    </label><br>
-    <button onclick="saveConstruct()" style="margin-top:12px;">Зберегти зміни</button>
-</section>
-<!-- ===== AUTH MODAL ===== -->
-<div id="auth-form-bg">
-    <form id="auth-form" onsubmit="return false;">
-        <h2 id="auth-title">Реєстрація</h2>
-        <input id="auth-username" type="text" maxlength="20" required placeholder="Логін">
-        <input id="auth-password" type="password" maxlength="24" required placeholder="Пароль">
-        <button id="auth-btn" type="button" onclick="onAuth()">Далі</button>
-        <div style="margin-top: 15px;">
-            <a href="#" id="switch-auth" style="font-size:16px;color:#1e256a;">Вже є акаунт?</a>
+    <!-- Сповіщення -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Модальне вікно входу -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Вхід в акаунт</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="Електронна пошта" required>
+                <input type="password" placeholder="Пароль" required>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-close" onclick="closeModal('loginModal')">Скасувати</button>
+                    <button type="submit" class="modal-submit">Увійти</button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-<!-- ===== POPUP ===== -->
-<div id="popup-bg">
-    <div id="popup">
-        <img id="p-img" alt>
-        <h2 id="p-title"></h2>
-        <p id="p-type"></p>
-        <p id="p-desc" style="font-size:17px; color:#2c375e"></p>
-        <p id="p-price"></p>
-        <button class="close" onclick="closePopup()">Закрити</button>
     </div>
-</div>
-<div id="toast-root"></div>
-<script>
-// === PERSISTENT DATA (pets, users, main page content) ===
-let pets = JSON.parse(localStorage.getItem('pets_v2')||'null') || [
-    {cat: "cat", img:"https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80", name:"Британське кошеня", desc:"Миле сіре кошеня, лагідний характер.", price:"4000 ₴", type:"Кішка"},
-    {cat: "cat", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b0?auto=format&fit=crop&w=800&q=80", name:"Шотландський висловухий", desc:"Муркотливе творіння з кумедними вушками.", price:"3700 ₴", type:"Кішка"},
-    {cat: "cat", img:"https://images.unsplash.com/photo-1558944355-c1e96b1c414c?auto=format&fit=crop&w=800&q=80", name:"Мейн-кун", desc:"Величезна, розумна, пухнаста кішка.", price:"6700 ₴", type:"Кішка"},
-    {cat: "dog", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b1?auto=format&fit=crop&w=800&q=80", name:"Лабрадор", desc:"Дружній сімейний собака, обожнює дітей.", price:"8500 ₴", type:"Собака"},
-    {cat: "dog", img:"https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80", name:"Німецька вівчарка", desc:"Розумний сторож, дуже відданий.", price:"12000 ₴", type:"Собака"},
-    {cat: "small", img:"https://images.unsplash.com/photo-1518715308788-3005759c41b4?auto=format&fit=crop&w=800&q=80", name:"Хом’як сирійський", desc:"Маленький пухнастик для дітей.", price:"290 ₴", type:"Гризун"},
-    {cat: "bird", img:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80", name:"Хвилястий папуга", desc:"Яскравий улюбленець для спілкування.", price:"320 ₴", type:"Птах"},
-    {cat: "exotic", img:"https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80", name:"Хамелеон пантеровий", desc:"Кольоровий хамелеон, екзотика для досвідчених.", price:"2480 ₴", type:"Екзотика"}
-];
-let users = JSON.parse(localStorage.getItem('users_v1')||'{}');
-let currentUser = localStorage.getItem('currentUser') || null;
-let homeContent = JSON.parse(localStorage.getItem('mainpage_v1')||'null') || {
-    title:"🐾 Ласкаво просимо в PetX!",
-    desc:"Купуй та продавай тваринок легко і безпечно.<br>Обирай друга – анімована колекція з ❤️",
-    img:"https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80"
-};
-// === SITE CONSTRUCTOR LOGIC (admin only) ===
-function openConstructor(){
-    document.getElementById('site-constructor').style.display='block';
-    document.getElementById('cons-title').value = homeContent.title || "";
-    document.getElementById('cons-desc').value = homeContent.desc || "";
-    document.getElementById('cons-img').value = homeContent.img || "";
-}
-function saveConstruct(){
-    let t = document.getElementById('cons-title').value.trim() || "🐾 Ласкаво просимо в PetX!";
-    let d = document.getElementById('cons-desc').value.trim() || "";
-    let i = document.getElementById('cons-img').value.trim() || "";
-    homeContent = {title:t, desc:d, img:i};
-    localStorage.setItem('mainpage_v1', JSON.stringify(homeContent));
-    renderHomeMain();
-    showToast("Головна сторінка оновлена!");
-}
-// === PROFILE SECTION LOGIC ===
-function showProfile() {
-    switchBtn();
-    document.getElementById("profile").style.display = "block";
-    document.getElementById("home").style.display = "none";
-    document.getElementById("shop").style.display = "none";
-    document.getElementById("site-constructor").style.display = "none";
-    let info = "<b>Логін:</b> "+(currentUser||"")+(currentUser==="admin"?" <b>(адмін)</b>":"");
-    document.getElementById("profileData").innerHTML = info;
-    document.getElementById("changePassBox").style.display = "none";
-}
-function showChangePass() {
-    document.getElementById("changePassBox").style.display = "block";
-}
-function changePass() {
-    let np = document.getElementById("newPass").value;
-    if(np.length<5){ showToast("Пароль закороткий!"); return;}
-    if(currentUser==="admin"){ showToast("Для адміна пароль змінювати не можна"); return; }
-    users[currentUser]=np;
-    localStorage.setItem('users_v1', JSON.stringify(users));
-    showToast("Пароль змінено");
-    document.getElementById("changePassBox").style.display = "none";
-}
-// === ГОЛОВНА ДИНАМІЧНО ===
-function renderHomeMain() {
-    document.getElementById("home-title").innerHTML = homeContent.title;
-    document.getElementById("home-desc").innerHTML = homeContent.desc;
-    document.getElementById("home-img").src = homeContent.img;
-    document.getElementById("home-img").alt = homeContent.title;
-}
-renderHomeMain();
-// ------------------ КАТАЛОГ, РЕНДЕР --------------------
-function renderPets() {
-    let list = document.getElementById('list');
-    list.innerHTML = '';
-    let q = (document.getElementById("search")||{value:""}).value?.trim().toLowerCase() || "";
-    let cat = (document.getElementById("category")||{value:"all"}).value;
-    pets.forEach((p, idx) => {
-        let display = true;
-        if (q && !(p.name.toLowerCase().includes(q) || (p.desc||"").toLowerCase().includes(q))) display = false;
-        if (cat !== "all" && p.cat !== cat) display = false;
-        if(!display) return;
-        let card = document.createElement('div');
-        card.className = 'card';
-        card.dataset.cat = p.cat;
-        card.innerHTML = `
-            <img src="${p.img}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p class="card-type">${p.type||''}</p>
-            <p class="price">${p.price||''}</p>
-            <button class="more-btn" onclick="openCard('${escapeStr(p.name)}','${escapeStr(p.img)}','${escapeStr(p.price)}','${escapeStr(p.type)}','${escapeStr(p.desc||'')}')">Детальніше</button>
-            <button class="buy-btn" onclick="showToast('Запит на покупку \"${p.name}\" відправлено! 🤗')">Купити</button>
-            <button class="fav-btn" onclick="showToast('Додано в улюблене 💗')">💗 Улюбити</button>
-            <button class="special-offer" onclick="showToast('Вибрано спеціальну пропозицію для: ${p.name} 🎁')">🤩 Пропозиція</button>
-        `;
-        list.appendChild(card);
-    });
-}
-renderPets();
-// === Зберігати pets після кожного додавання
-function persistPets(){
-    localStorage.setItem('pets_v2',JSON.stringify(pets));
-}
-// ----------------- ПОШУК ---------------------
-document.getElementById("search").addEventListener("input", ()=>{
-    renderPets();
-});
-// ---------------- ФІЛЬТР -----------------
-document.getElementById("category").addEventListener("change", ()=>{
-    renderPets();
-});
-// ---------------- CARDS POPUP ----------------------
-function openCard(title, img, price, type = "", desc = "") {
-    document.getElementById("p-title").innerText = title;
-    document.getElementById("p-img").src = img;
-    document.getElementById("p-img").alt = title;
-    document.getElementById("p-price").innerText = price;
-    document.getElementById("p-type").innerText = type ? "Тип: "+type : "";
-    document.getElementById("p-desc").innerText = desc ? desc : "";
-    document.getElementById("popup-bg").style.display = "flex";
-}
-function closePopup() {
-    document.getElementById("popup-bg").style.display = "none";
-}
-// ---------------- TOAST (сповіщення) ---------------------
-function showToast(msg) {
-    let toastRoot = document.getElementById('toast-root');
-    let t = document.createElement('div');
-    t.className = 'toast';
-    t.innerHTML = msg;
-    toastRoot.appendChild(t);
-    setTimeout(()=>{ t.style.opacity=0; setTimeout(()=>t.remove(),350)}, 2100);
-}
-// ----------------- AUTH ------------------
-function showAuthForm(mode) {
-    let bg = document.getElementById('auth-form-bg');
-    let title = document.getElementById('auth-title');
-    let submitBtn = document.getElementById('auth-btn');
-    let link = document.getElementById('switch-auth');
-    let form = document.getElementById('auth-form');
-    form.reset();
-    if (mode === "register") {
-        title.innerText = "Реєстрація";
-        submitBtn.innerText = "Зареєструватися";
-        link.innerText = "Вже є акаунт?";
-        link.onclick = ()=>showAuthForm('login');
-        submitBtn.onclick = doRegister;
-    } else {
-        title.innerText = "Вхід";
-        submitBtn.innerText = "Увійти";
-        link.innerText = "Створити новий акаунт";
-        link.onclick = ()=>showAuthForm('register');
-        submitBtn.onclick = doLogin;
-    }
-    bg.style.display = "flex";
-}
-function closeAuthForm() {
-    document.getElementById('auth-form-bg').style.display = "none";
-}
-// ---- Register & Login Logic (імітація через localStorage) ----
-function doRegister() {
-    let user = document.getElementById('auth-username').value.trim();
-    let pass = document.getElementById('auth-password').value;
-    if (user.length<3 || pass.length<5) {
-        showToast('Логін або пароль закороткі');
-        return;
-    }
-    if (users[user]) {
-        showToast('Такий логін вже існує.');
-        return;
-    }
-    users[user] = pass;
-    localStorage.setItem('users_v1', JSON.stringify(users));
-    localStorage.setItem('currentUser', user);
-    currentUser = user;
-    updateAuthUI();
-    closeAuthForm();
-    showToast('Реєстрація успішна!');
-}
-function doLogin() {
-    let user = document.getElementById('auth-username').value.trim();
-    let pass = document.getElementById('auth-password').value;
-    if ((user === "admin" && pass === "123123123")
-        || (users[user] && users[user] === pass)) {
-        localStorage.setItem('currentUser', user);
-        currentUser = user;
-        updateAuthUI();
-        closeAuthForm();
-        showToast('Вхід виконано!');
-    } else {
-        showToast('Помилка авторизації');
-    }
-}
-function logout() {
-    localStorage.removeItem('currentUser');
-    currentUser = null;
-    updateAuthUI();
-    showToast('Ви вийшли з акаунта');
-}
-function updateAuthUI() {
-    document.getElementById('logout-btn').style.display = currentUser ? "" : "none";
-    document.getElementById('registerNavBtn').style.display = currentUser ? "none" : "";
-    document.getElementById('loginNavBtn').style.display = currentUser ? "none" : "";
-    document.getElementById('profileNavBtn').style.display = currentUser ? "" : "none";
-    document.getElementById('admin-panel').style.display = (currentUser==="admin") ? "" : "none";
-    document.getElementById('site-constructor').style.display = "none";
-    document.getElementById('profile').style.display = "none";
-    if(currentUser==="admin"){ 
-        document.getElementById('site-constructor').style.display="block";
-        openConstructor();
-    }
-}
-updateAuthUI();
-// --------------- ADMIN: Додає тваринку -----------------
-function addNewPet() {
-    let cat = document.getElementById('add-category').value;
-    let name = document.getElementById('add-name').value.trim();
-    let desc = document.getElementById('add-desc').value.trim();
-    let price = document.getElementById('add-price').value.trim();
-    let img = document.getElementById('add-img').value.trim();
-    if (!cat || !name || !price || !img) {
-        showToast('Заповніть усі поля!');
-        return;
-    }
-    pets.push({
-        cat, name, desc, price,
-        img, type: (cat==="cat" ? "Кішка": cat==="dog"?"Собака":cat==="small"?"Гризун":cat==="bird"?"Птах":"Екзотика")
-    });
-    persistPets();
-    renderPets();
-    showToast('Додано!');
-    document.getElementById('add-name').value="";
-    document.getElementById('add-desc').value="";
-    document.getElementById('add-price').value="";
-    document.getElementById('add-img').value="";
-}
-// ------------ Навігація ----------------
-function switchBtn(activeId) {
-    homeBtn.classList.remove('active');
-    shopBtn.classList.remove('active');
-    if(activeId) document.getElementById(activeId).classList.add('active');
-}
-function showHome() {
-    switchBtn('homeBtn');
-    home.style.display = "block";
-    shop.style.display = "none";
-    document.getElementById('site-constructor').style.display = "none";
-    document.getElementById('profile').style.display = "none";
-    window.scrollTo({top:0, behavior:"smooth"});
-}
-function showShop() {
-    switchBtn('shopBtn');
-    home.style.display = "none";
-    shop.style.display = "block";
-    document.getElementById('site-constructor').style.display = (currentUser==="admin")?"block":"none";
-    document.getElementById('profile').style.display = "none";
-    window.scrollTo({top:0, behavior:"smooth"});
-}
-// Допоміжне
-function escapeStr(s) {
-    return String(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
-}
-document.getElementById('auth-form-bg').addEventListener('click', function(e){
-    if (e.target===this) closeAuthForm();
-});
-</script>
+
+    <!-- Модальне вікно додавання оголошення -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2>Додати оголошення</h2>
+            <form id="addForm">
+                <input type="text" placeholder="Назва оголошення" required>
+                <select required>
+                    <option value="">Виберіть категорію</option>
+                    <option value="dog">Собаки</option>
+                    <option value="cat">Коти</option>
+                    <option value="rodent">Гризуни</option>
+                    <option value="bird">Птахи</option>
+                    <option value="fish">Риби</option>
+                </select>
+                <select required>
+                    <option value="">Тип оголошення</option>
+                    <option value="sell">Продаж</option>
+                    <option value="buy">Купівля</option>
+                    <option value="give">В дар</option>
+                </select>
+                <input type="number" placeholder="Ціна (грн)" min="0">
+                <input type="text" placeholder="Місто" required>
+                <textarea placeholder="Опис тварини" required></textarea>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-close" onclick="closeModal('addModal')">Скасувати</button>
+                    <button type="submit" class="modal-submit">Опублікувати</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Шапка сайту -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo" onclick="showNotification('Перехід на головну сторінку')">Зоо<span>OLX</span></div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Пошук тварин..." id="searchInput">
+                    <button onclick="performSearch()">Пошук</button>
+                </div>
+                <div class="user-actions">
+                    <a onclick="openModal('loginModal')">Увійти</a>
+                    <a class="add-btn" onclick="openModal('addModal')">Додати оголошення</a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a class="active" onclick="filterByCategory('all')">Всі тварини</a></li>
+                    <li><a onclick="filterByCategory('dog')">Собаки</a></li>
+                    <li><a onclick="filterByCategory('cat')">Коти</a></li>
+                    <li><a onclick="filterByCategory('rodent')">Гризуни</a></li>
+                    <li><a onclick="filterByCategory('bird')">Птахи</a></li>
+                    <li><a onclick="filterByCategory('fish')">Риби</a></li>
+                    <li><a onclick="filterByCategory('other')">Інші тварини</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основний контент -->
+    <main class="container">
+        <h1 class="page-title">Тварини</h1>
+        
+        <!-- Фільтри -->
+        <section class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="city">Місто</label>
+                    <select id="city" onchange="applyFilters()">
+                        <option value="">Всі міста</option>
+                        <option value="kyiv">Київ</option>
+                        <option value="lviv">Львів</option>
+                        <option value="kharkiv">Харків</option>
+                        <option value="odesa">Одеса</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="type">Вид тварини</label>
+                    <select id="type" onchange="applyFilters()">
+                        <option value="">Всі види</option>
+                        <option value="dog">Собаки</option>
+                        <option value="cat">Коти</option>
+                        <option value="rodent">Гризуни</option>
+                        <option value="bird">Птахи</option>
+                        <option value="fish">Риби</option>
+                        <option value="other">Інші</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="category">Категорія</label>
+                    <select id="category" onchange="applyFilters()">
+                        <option value="">Всі категорії</option>
+                        <option value="sell">Продаж</option>
+                        <option value="buy">Купівля</option>
+                        <option value="give">В дар</option>
+                        <option value="mate">Шукаю пару</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="price-min">Ціна від (грн)</label>
+                    <input type="number" id="price-min" placeholder="Мін. ціна" onchange="applyFilters()">
+                </div>
+                <div class="filter-group">
+                    <label for="price-max">Ціна до (грн)</label>
+                    <input type="number" id="price-max" placeholder="Макс. ціна" onchange="applyFilters()">
+                </div>
+                <div class="filter-group">
+                    <label for="breed">Порода</label>
+                    <input type="text" id="breed" placeholder="Наприклад, лабрадор" onchange="applyFilters()">
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="reset-btn" onclick="resetFilters()">Скинути</button>
+                <button class="apply-btn" onclick="applyFilters()">Застосувати фільтри</button>
+            </div>
+        </section>
+        
+        <!-- Список оголошень -->
+        <section class="listings" id="listingsContainer">
+            <!-- Оголошення будуть динамічно завантажені тут -->
+        </section>
+        
+        <!-- Пагінація -->
+        <ul class="pagination" id="pagination">
+            <!-- Пагінація буде динамічно створена -->
+        </ul>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ЗооOLX</h3>
+                    <p>Платформа для пошуку та розміщення оголошень про тварин в Україні.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Категорії</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="filterByCategory('dog')">Собаки</a></li>
+                        <li><a onclick="filterByCategory('cat')">Коти</a></li>
+                        <li><a onclick="filterByCategory('rodent')">Гризуни</a></li>
+                        <li><a onclick="filterByCategory('bird')">Птахи</a></li>
+                        <li><a onclick="filterByCategory('fish')">Риби</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Допомога</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showNotification('Інформація про покупку')">Як купувати?</a></li>
+                        <li><a onclick="showNotification('Інформація про продаж')">Як продавати?</a></li>
+                        <li><a onclick="showNotification('Правила безпеки')">Правила безпеки</a></li>
+                        <li><a onclick="showNotification('Контактна інформація')">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакти</h3>
+                    <ul class="footer-links">
+                        <li>Email: info@zoo-olx.ua</li>
+                        <li>Телефон: 0-800-123-456</li>
+                        <li>Адреса: Київ, вул. Тваринна, 12</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ЗооOLX. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Дані оголошень
+        const listingsData = [
+            {
+                id: 1,
+                title: "Цуценя лабрадора, 2 місяці",
+                price: 3500,
+                location: "Київ, Дарницький район",
+                date: "15.05.2023",
+                category: "dog",
+                type: "sell",
+                image: "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Лабрадор"
+            },
+            {
+                id: 2,
+                title: "Кіт шотландський висловухий",
+                price: 2000,
+                location: "Львів, Франківський район",
+                date: "12.05.2023",
+                category: "cat",
+                type: "sell",
+                image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Шотландський"
+            },
+            {
+                id: 3,
+                title: "Хом'яки джунгарські, віддамо в добрі руки",
+                price: 0,
+                location: "Харків, Салтівський район",
+                date: "10.05.2023",
+                category: "rodent",
+                type: "give",
+                image: "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Джунгарський"
+            },
+            {
+                id: 4,
+                title: "Папуга хвилястий, 1 рік",
+                price: 1200,
+                location: "Одеса, Приморський район",
+                date: "08.05.2023",
+                category: "bird",
+                type: "sell",
+                image: "https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Хвилястий"
+            },
+            {
+                id: 5,
+                title: "Акваріумні рибки гуппі",
+                price: 800,
+                location: "Київ, Оболонський район",
+                date: "05.05.2023",
+                category: "fish",
+                type: "sell",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Гуппі"
+            },
+            {
+                id: 6,
+                title: "Кролик декоративний, карликовий",
+                price: 1500,
+                location: "Київ, Троєщина",
+                date: "03.05.2023",
+                category: "rodent",
+                type: "sell",
+                image: "https://images.unsplash.com/photo-1559253664-ca249d4608c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                breed: "Карликовий"
+            }
+        ];
+
+        // Поточний стан фільтрів
+        let currentFilters = {
+            city: '',
+            type: '',
+            category: '',
+            priceMin: '',
+            priceMax: '',
+            breed: ''
+        };
+
+        // Поточна сторінка
+        let currentPage = 1;
+        const listingsPerPage = 6;
+
+        // Ініціалізація
+        document.addEventListener('DOMContentLoaded', function() {
+            renderListings();
+            setupEventListeners();
+        });
+
+        // Налаштування обробників подій
+        function setupEventListeners() {
+            // Пошук при натисканні Enter
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // Обробка форми входу
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Вхід успішний!');
+                closeModal('loginModal');
+            });
+
+            // Обробка форми додавання оголошення
+            document.getElementById('addForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Оголошення успішно додано!');
+                closeModal('addModal');
+            });
+
+            // Закриття модальних вікон при кліку поза ними
+            window.addEventListener('click', function(e) {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Відображення оголошень
+        function renderListings() {
+            const container = document.getElementById('listingsContainer');
+            const filteredListings = filterListings();
+            
+            // Пагінація
+            const totalPages = Math.ceil(filteredListings.length / listingsPerPage);
+            const startIndex = (currentPage - 1) * listingsPerPage;
+            const paginatedListings = filteredListings.slice(startIndex, startIndex + listingsPerPage);
+            
+            container.innerHTML = '';
+            
+            if (paginatedListings.length === 0) {
+                container.innerHTML = '<p>Оголошень не знайдено. Спробуйте змінити фільтри.</p>';
+                return;
+            }
+            
+            paginatedListings.forEach(listing => {
+                const priceText = listing.price > 0 ? `${listing.price} грн` : 'Безкоштовно';
+                const categoryText = getCategoryText(listing.category);
+                const typeText = getTypeText(listing.type);
+                
+                const card = document.createElement('div');
+                card.className = 'listing-card';
+                card.innerHTML = `
+                    <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                    <div class="listing-details">
+                        <div class="listing-price">${priceText}</div>
+                        <h3 class="listing-title">${listing.title}</h3>
+                        <div class="listing-location">${listing.location}</div>
+                        <div class="listing-date">Додано: ${listing.date}</div>
+                        <div class="listing-features">
+                            <span class="animal-badge">${categoryText}</span>
+                            <span class="animal-badge">${typeText}</span>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => showListingDetails(listing.id));
+                container.appendChild(card);
+            });
+            
+            renderPagination(totalPages);
+        }
+
+        // Фільтрація оголошень
+        function filterListings() {
+            return listingsData.filter(listing => {
+                // Фільтр по місту
+                if (currentFilters.city && !listing.location.toLowerCase().includes(currentFilters.city)) {
+                    return false;
+                }
+                
+                // Фільтр по типу тварини
+                if (currentFilters.type && listing.category !== currentFilters.type) {
+                    return false;
+                }
+                
+                // Фільтр по категорії оголошення
+                if (currentFilters.category && listing.type !== currentFilters.category) {
+                    return false;
+                }
+                
+                // Фільтр по ціні
+                if (currentFilters.priceMin && listing.price < parseInt(currentFilters.priceMin)) {
+                    return false;
+                }
+                
+                if (currentFilters.priceMax && listing.price > parseInt(currentFilters.priceMax)) {
+                    return false;
+                }
+                
+                // Фільтр по породі
+                if (currentFilters.breed && !listing.breed.toLowerCase().includes(currentFilters.breed.toLowerCase())) {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+
+        // Застосування фільтрів
+        function applyFilters() {
+            currentFilters.city = document.getElementById('city').value;
+            currentFilters.type = document.getElementById('type').value;
+            currentFilters.category = document.getElementById('category').value;
+            currentFilters.priceMin = document.getElementById('price-min').value;
+            currentFilters.priceMax = document.getElementById('price-max').value;
+            currentFilters.breed = document.getElementById('breed').value;
+            
+            currentPage = 1;
+            renderListings();
+            showNotification('Фільтри застосовано');
+        }
+
+        // Скидання фільтрів
+        function resetFilters() {
+            document.getElementById('city').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('price-min').value = '';
+            document.getElementById('price-max').value = '';
+            document.getElementById('breed').value = '';
+            
+            currentFilters = {
+                city: '',
+                type: '',
+                category: '',
+                priceMin: '',
+                priceMax: '',
+                breed: ''
+            };
+            
+            currentPage = 1;
+            renderListings();
+            showNotification('Фільтри скинуто');
+        }
+
+        // Фільтрація по категорії
+        function filterByCategory(category) {
+            document.getElementById('type').value = category === 'all' ? '' : category;
+            applyFilters();
+            
+            // Оновлення активної навігації
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Виконання пошуку
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                showNotification(`Результати пошуку для: ${searchTerm}`);
+                // Тут буде реальна логіка пошуку
+            }
+        }
+
+        // Відображення пагінації
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = i;
+                if (i === currentPage) {
+                    a.classList.add('active');
+                }
+                a.addEventListener('click', () => {
+                    currentPage = i;
+                    renderListings();
+                });
+                li.appendChild(a);
+                pagination.appendChild(li);
+            }
+        }
+
+        // Відкриття модального вікна
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        // Закриття модального вікна
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Показати деталі оголошення
+        function showListingDetails(id) {
+            const listing = listingsData.find(item => item.id === id);
+            if (listing) {
+                showNotification(`Деталі оголошення: ${listing.title}`);
+            }
+        }
+
+        // Показати сповіщення
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Допоміжні функції
+        function getCategoryText(category) {
+            const categories = {
+                'dog': 'Собаки',
+                'cat': 'Коти',
+                'rodent': 'Гризуни',
+                'bird': 'Птахи',
+                'fish': 'Риби'
+            };
+            return categories[category] || 'Інші';
+        }
+
+        function getTypeText(type) {
+            const types = {
+                'sell': 'Продаж',
+                'buy': 'Купівля',
+                'give': 'В дар',
+                'mate': 'Шукаю пару'
+            };
+            return types[type] || 'Інше';
+        }
+    </script>
 </body>
 </html>
