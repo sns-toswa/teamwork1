@@ -2,16 +2,16 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>PetX – Продаж тваринок</title>
+<title>PetX – Магазин тваринок</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 /* -------------------- ОСНОВА -------------------- */
 body {
     margin: 0;
-    background: #f3f4f7;
+    background: #f5f6fa;
     font-family: "Segoe UI", sans-serif;
-    animation: fadeIn 1s ease;
+    animation: fadeIn 0.7s ease;
 }
 
 @keyframes fadeIn {
@@ -19,17 +19,67 @@ body {
     to { opacity: 1; }
 }
 
-header {
+/* -------------------- МЕНЮ -------------------- */
+nav {
     background: white;
-    padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* -------------------- Пошук -------------------- */
+nav button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+nav button:hover {
+    background: #e6e6e6;
+}
+
+/* -------------------- HOME -------------------- */
+#home {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#home h1 {
+    font-size: 42px;
+}
+
+#home p {
+    font-size: 20px;
+    margin-top: -10px;
+}
+
+.hero-img {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* -------------------- SHOP -------------------- */
+#shop { display: none; }
+
+.header-shop {
+    text-align: center;
+    padding: 20px;
+}
+
 #search {
     width: 60%;
     padding: 12px;
@@ -41,18 +91,15 @@ header {
 
 #search:focus {
     border-color: #2b8cff;
-    transform: scale(1.02);
 }
 
-/* -------------------- Фільтр -------------------- */
 #category {
     padding: 10px;
     border-radius: 10px;
-    margin-left: 10px;
     font-size: 16px;
 }
 
-/* -------------------- Контейнер карток -------------------- */
+/* -------------------- ТОВАРИ -------------------- */
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -60,14 +107,13 @@ header {
     padding: 30px;
 }
 
-/* -------------------- Картки -------------------- */
 .card {
     background: white;
     padding: 15px;
     border-radius: 18px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     transition: 0.3s;
-    animation: slideUp 0.6s ease;
+    animation: slideUp 0.5s ease;
 }
 
 @keyframes slideUp {
@@ -76,31 +122,13 @@ header {
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
 
 .card img {
     width: 100%;
-    border-radius: 14px;
-}
-
-/* -------------------- Кнопки -------------------- */
-button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
-    background: #2b8cff;
-    color: white;
-    font-size: 16px;
     border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #0069e6;
 }
 
 /* -------------------- POPUP -------------------- */
@@ -115,9 +143,9 @@ button:hover {
 }
 
 #popup {
-    width: 90%;
-    max-width: 400px;
     background: white;
+    width: 90%;
+    max-width: 420px;
     padding: 25px;
     border-radius: 16px;
     animation: pop 0.35s ease;
@@ -128,57 +156,124 @@ button:hover {
     to { transform: scale(1); opacity: 1; }
 }
 
-#popup img {
-    width: 100%;
-    border-radius: 12px;
+button {
+    padding: 12px;
+    border: none;
+    background: #2b8cff;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #0069e6;
 }
 
 .close {
     background: crimson;
-    margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🐾 PetX – Продаж тваринок</h1>
-    <input id="search" type="text" placeholder="Пошук...">
-    <select id="category">
-        <option value="all">Всі категорії</option>
-        <option value="cat">Коти</option>
-        <option value="dog">Собаки</option>
-        <option value="small">Дрібні тварини</option>
-    </select>
-</header>
+<!-- ---------------- MENU ---------------- -->
+<nav>
+    <button onclick="showHome()">🏠 Головна</button>
+    <button onclick="showShop()">🛒 Магазин</button>
+</nav>
 
-<div class="container" id="list">
+<!-- ---------------- HOME PAGE ---------------- -->
+<section id="home">
+    <h1>🐾 Ласкаво просимо в PetX!</h1>
+    <p>Купуй та продавай тваринок легко і безпечно.</p>
 
-    <div class="card" data-cat="cat">
-        <img src="https://placekitten.com/400/300">
-        <h3>Кошеня британське</h3>
-        <p class="price">2000 ₴</p>
-        <button onclick="openCard('Кошеня британське','https://placekitten.com/400/300','2000 ₴')">Деталі</button>
+    <img class="hero-img" src="https://i.imgur.com/HMYWjvG.jpeg">
+
+    <button style="margin-top:30px;" onclick="showShop()">Перейти в магазин</button>
+</section>
+
+<!-- ---------------- SHOP PAGE ---------------- -->
+<section id="shop">
+    <div class="header-shop">
+        <h2>🛒 Магазин тваринок</h2>
+
+        <input id="search" type="text" placeholder="Пошук...">
+
+        <select id="category">
+            <option value="all">Всі категорії</option>
+            <option value="cat">Коти</option>
+            <option value="dog">Собаки</option>
+            <option value="small">Малі тварини</option>
+        </select>
     </div>
 
-    <div class="card" data-cat="dog">
-        <img src="https://placedog.net/400/300">
-        <h3>Щеня лабрадора</h3>
-        <p class="price">4500 ₴</p>
-        <button onclick="openCard('Щеня лабрадора','https://placedog.net/400/300','4500 ₴')">Деталі</button>
+    <div class="container" id="list">
+
+        <!-- ==== КОТИ ==== -->
+        <div class="card" data-cat="cat">
+            <img src="https://i.imgur.com/VupQhcs.jpeg">
+            <h3>Британське кошеня</h3>
+            <p class="price">2000 ₴</p>
+            <button onclick="openCard('Британське кошеня', 'https://i.imgur.com/VupQhcs.jpeg','2000 ₴')">Деталі</button>
+        </div>
+
+        <div class="card" data-cat="cat">
+            <img src="https://i.imgur.com/CtXrFjZ.jpeg">
+            <h3>Шотландський висловухий</h3>
+            <p class="price">3500 ₴</p>
+            <button onclick="openCard('Шотландський висловухий','https://i.imgur.com/CtXrFjZ.jpeg','3500 ₴')">Деталі</button>
+        </div>
+
+        <div class="card" data-cat="cat">
+            <img src="https://i.imgur.com/SV3Z9mD.jpeg">
+            <h3>Мейн-кун</h3>
+            <p class="price">6000 ₴</p>
+            <button onclick="openCard('Мейн-кун','https://i.imgur.com/SV3Z9mD.jpeg','6000 ₴')">Деталі</button>
+        </div>
+
+        <!-- ==== СОБАКИ ==== -->
+        <div class="card" data-cat="dog">
+            <img src="https://i.imgur.com/DxXegNP.jpeg">
+            <h3>Лабрадор</h3>
+            <p class="price">4500 ₴</p>
+            <button onclick="openCard('Лабрадор','https://i.imgur.com/DxXegNP.jpeg','4500 ₴')">Деталі</button>
+        </div>
+
+        <div class="card" data-cat="dog">
+            <img src="https://i.imgur.com/9sYdKkd.jpeg">
+            <h3>Німецька вівчарка</h3>
+            <p class="price">7000 ₴</p>
+            <button onclick="openCard('Німецька вівчарка','https://i.imgur.com/9sYdKkd.jpeg','7000 ₴')">Деталі</button>
+        </div>
+
+        <div class="card" data-cat="dog">
+            <img src="https://i.imgur.com/jupIPu3.jpeg">
+            <h3>Хаскі синьоокий</h3>
+            <p class="price">6200 ₴</p>
+            <button onclick="openCard('Хаскі','https://i.imgur.com/jupIPu3.jpeg','6200 ₴')">Деталі</button>
+        </div>
+
+        <!-- ==== МАЛІ ТВАРИНИ ==== -->
+        <div class="card" data-cat="small">
+            <img src="https://i.imgur.com/dF8UBuR.jpeg">
+            <h3>Хом’як сирійський</h3>
+            <p class="price">150 ₴</p>
+            <button onclick="openCard('Хом’як сирійський','https://i.imgur.com/dF8UBuR.jpeg','150 ₴')">Деталі</button>
+        </div>
+
+        <div class="card" data-cat="small">
+            <img src="https://i.imgur.com/Vba4blG.jpeg">
+            <h3>Морська свинка</h3>
+            <p class="price">200 ₴</p>
+            <button onclick="openCard('Морська свинка','https://i.imgur.com/Vba4blG.jpeg','200 ₴')">Деталі</button>
+        </div>
+
     </div>
+</section>
 
-    <div class="card" data-cat="small">
-        <img src="https://placebear.com/400/300">
-        <h3>Хом’як сирійський</h3>
-        <p class="price">150 ₴</p>
-        <button onclick="openCard('Хом’як сирійський','https://placebear.com/400/300','150 ₴')">Деталі</button>
-    </div>
-
-</div>
-
-<!-- POPUP -->
+<!-- ---------------- POPUP ---------------- -->
 <div id="popup-bg">
     <div id="popup">
         <img id="p-img">
@@ -189,23 +284,34 @@ button:hover {
 </div>
 
 <script>
-/* ---- Пошук ---- */
-document.getElementById("search").addEventListener("input", () => {
+/* --- Перемикання сторінок --- */
+function showHome() {
+    home.style.display = "block";
+    shop.style.display = "none";
+}
+
+function showShop() {
+    home.style.display = "none";
+    shop.style.display = "block";
+}
+
+/* --- Пошук --- */
+search.addEventListener("input", () => {
     let q = search.value.toLowerCase();
     document.querySelectorAll(".card").forEach(c => {
         c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none";
     });
 });
 
-/* ---- Фільтрація ---- */
-document.getElementById("category").addEventListener("change", () => {
+/* --- Фільтри --- */
+category.addEventListener("change", () => {
     let cat = category.value;
     document.querySelectorAll(".card").forEach(c => {
         c.style.display = (cat === "all" || c.dataset.cat === cat) ? "block" : "none";
     });
 });
 
-/* ---- POPUP ---- */
+/* --- POPUP --- */
 function openCard(title, img, price) {
     document.getElementById("p-title").innerText = title;
     document.getElementById("p-img").src = img;
